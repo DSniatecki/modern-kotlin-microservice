@@ -31,11 +31,11 @@ class CarConfig {
                 "Time of query responsible for finding multiple cars by ids"
             ).withCounter(
                 "car_query_find_multiple_count",
-                "Number of executed queries responsible for finding all cars"
+                "Number of executed queries responsible for finding multiple cars by ids"
             ),
             findAllTimeRecorder = meterRegistry.createTimeRecorderMetric(
                 "car_query_find_all_time",
-                "Time of query responsible for finding multiple cars by ids"
+                "Time of query responsible for finding all cars "
             ).withCounter(
                 "car_query_find_all_count",
                 "Number of executed queries responsible for finding all cars"
