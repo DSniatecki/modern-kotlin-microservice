@@ -27,6 +27,7 @@ class CarInternalController(
     fun getCar(@PathVariable(name = "carId") carId: String): Publisher<Car> =
         carService.get(carId)
             .switchIfEmpty(Mono.error(NoSuchElementException("Car with id: '$carId' does not exist.")))
+            .onErrorMap({ it is NoSuchElementException }) { ResponseStatusException(HttpStatus.NOT_FOUND, it.message) }
 
     @GetMapping(value = ["/cars"], produces = [JSON])
     fun getCars(
