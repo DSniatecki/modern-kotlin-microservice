@@ -52,13 +52,13 @@ internal class CarServiceTest(
     }
 
     @Test
-    fun `Should get saved ar`() {
+    fun `Should get car`() {
         val savedCar = carService.save(createTestCarData()).block()!!
         assertThat(carService.get(savedCar.id).block()).isEqualTo(savedCar)
     }
 
     @Test
-    fun `Should get multiple saved cars`() {
+    fun `Should get multiple cars`() {
         val savedCar1 = carService.save(createTestCarData(brand = "Brand1")).block()!!
         val savedCar2 = carService.save(createTestCarData(brand = "Brand2")).block()!!
         assertThat(carService.getMultiple(setOf(savedCar1.id, savedCar2.id)).toList())
