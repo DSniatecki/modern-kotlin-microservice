@@ -54,7 +54,7 @@ class CarInternalController(
             .switchIfEmpty(Mono.error(NoSuchElementException("Car with id: '$carId' does not exist.")))
             .handleErrors()
 
-    @DeleteMapping(value = ["/cars/{carId}"], produces = [JSON])
+    @DeleteMapping(value = ["/cars/{carId}"])
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteCar(@PathVariable(name = "carId") carId: String): Publisher<Unit> =
         carService.delete(carId)
