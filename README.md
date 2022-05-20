@@ -23,6 +23,10 @@ Technologies used:
 - PostgreSQL 14
 - Docker 20.10.12
 
+Architecture:
+
+![architecture-diagram](./docs/car-storage-architecture.png)
+
 Docker Hub:
 
 https://hub.docker.com/u/dsniatecki
@@ -33,7 +37,3 @@ How to start the system:
 
 1. Clone repo
 2. Execute: docker-compose -f docker-compose-0.1.0.yml up
-
-Architecture:
-
-![architecture-diagram](./docs/car-storage-architecture.png)
