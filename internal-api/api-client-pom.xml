@@ -5,14 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.dsniatecki.carstorage</groupId>
-    <artifactId>car-storage-internal-api</artifactId>
-    <version>0.1.0</version>
-    <name>Car Storage Internal Api</name>
-    <description>Car Storage Internal OpenAPI definitions</description>
+    <artifactId>car-storage-internal-api-client</artifactId>
+    <version>0.2.0</version>
+    <name>Car Storage Internal API Client </name>
+    <description>Car Storage Internal OpenAPI Client definitions</description>
 
     <properties>
         <java.version>17</java.version>
-        <kotlin.version>1.6.21</kotlin.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -70,7 +69,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>src/main/car-storage-internal-api.yaml</inputSpec>
+                            <inputSpec>src/api.yaml</inputSpec>
                             <output>${project.build.directory}/generated-sources/java</output>
                             <generatorName>java</generatorName>
                             <configOptions>
@@ -79,8 +78,8 @@
                                 <groupId>${project.groupId}</groupId>
                                 <artifactVersion>${project.version}</artifactVersion>
                                 <dateLibrary>java8-localdatetime</dateLibrary>
-                                <apiPackage>com.dsniatecki.carstorage.api</apiPackage>
-                                <modelPackage>com.dsniatecki.carstorage.model</modelPackage>
+                                <apiPackage>com.dsniatecki.carstorage.api.internal</apiPackage>
+                                <modelPackage>com.dsniatecki.carstorage.model.internal</modelPackage>
                                 <invokerPackage>com.dsniatecki.carstorage</invokerPackage>
                                 <skipValidateSpec>true</skipValidateSpec>
                                 <java8>true</java8>
