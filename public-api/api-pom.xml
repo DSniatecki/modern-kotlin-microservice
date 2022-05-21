@@ -6,7 +6,7 @@
 
     <groupId>com.dsniatecki.carstorage</groupId>
     <artifactId>car-storage-public-api</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.2.0</version>
     <name>Car Storage Public API</name>
     <description>Car Storage Public OpenAPI definitions</description>
 
@@ -74,9 +74,10 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <generatorName>spring</generatorName>
                             <inputSpec>src/api.yaml</inputSpec>
                             <output>${project.build.directory}/generated-sources/java</output>
-                            <generatorName>spring</generatorName>
+                            <modelNameSuffix>Dto</modelNameSuffix>
                             <configOptions>
                                 <library>spring-boot</library>
                                 <artifactId>${project.artifactId}</artifactId>
