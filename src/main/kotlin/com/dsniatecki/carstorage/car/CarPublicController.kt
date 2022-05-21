@@ -1,31 +1,26 @@
 package com.dsniatecki.carstorage.car
 
-import org.springframework.http.MediaType.APPLICATION_JSON_VALUE as JSON
-import org.reactivestreams.Publisher
-import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
+import com.dsniatecki.carstorage.api.pub.CarsApi
+import com.dsniatecki.carstorage.model.pub.CarDTO
+import java.util.Optional
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.server.ResponseStatusException
+import org.springframework.web.server.ServerWebExchange
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping(path = ["/api/public"])
-class CarPublicController(
-    private val carService: CarService
-) {
+class CarPublicController(private val carService: CarService) : CarsApi {
 
-    @GetMapping(value = ["/cars/{carId}"], produces = [JSON])
-    fun getCar(@PathVariable(name = "carId") carId: String): Publisher<Car> =
+    override fun getCar(carId: String, exchange: ServerWebExchange): Mono<ResponseEntity<CarDTO>> =
         carService.get(carId)
+            .map { ResponseEntity.ok(it.toPublicDTO()) }
             .switchIfEmpty(Mono.error(NoSuchElementException("Car with id: '$carId' does not exist.")))
-            .onErrorMap({ it is NoSuchElementException }) { ResponseStatusException(HttpStatus.NOT_FOUND, it.message) }
 
-    @GetMapping(value = ["/cars"], produces = [JSON])
-    fun getCars(
-        @RequestParam(name = "carIds", required = false) carIds: Set<String>?
-    ): Publisher<Car> =
-        if (carIds.isNullOrEmpty()) carService.getAll() else carService.getMultiple(carIds)
+    override fun getCars(carIds: Optional<Set<String>>, exchange: ServerWebExchange): Mono<ResponseEntity<Flux<CarDTO>>> =
+        Mono.just(carIds.map { carService.getMultiple(it) }.orElseGet { carService.getAll() })
+            .map { flux -> flux.map { it.toPublicDTO() } }
+            .map { ResponseEntity.ok(it) }
 }

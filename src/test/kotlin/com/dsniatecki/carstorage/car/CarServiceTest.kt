@@ -5,6 +5,7 @@ import com.dsniatecki.carstorage.cleanDb
 import com.dsniatecki.carstorage.createDbTestContainer
 import com.dsniatecki.carstorage.registerDbProperties
 import com.dsniatecki.carstorage.toList
+import com.dsniatecki.carstorage.utils.generateId
 import java.time.LocalDate
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
