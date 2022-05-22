@@ -32,7 +32,7 @@ class CarInternalController(private val carService: CarService) : CarsApi {
 
     override fun updateCar(carId: String, carDataDto: Mono<CarDataDto>, exchange: ServerWebExchange): Mono<ResponseEntity<CarDto>> =
         carDataDto.flatMap { carService.update(carId, it.toCarData()) }
-            .map { ResponseEntity.status(HttpStatus.CREATED).body(it.toInternalDto()) }
+            .map { ResponseEntity.ok(it.toInternalDto()) }
 
     override fun deleteCar(carId: String, exchange: ServerWebExchange): Mono<ResponseEntity<Void>> =
         carService.delete(carId)
