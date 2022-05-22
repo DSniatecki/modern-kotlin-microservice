@@ -1,4 +1,4 @@
-# modern-kotlin-microservice
+# Modern Kotlin Microservice - Car Storage
 
 Car Storage is a service responsible for storing cars data.
 It is an example of a modern, reactive and lightweight microservice written with Kotlin. 
